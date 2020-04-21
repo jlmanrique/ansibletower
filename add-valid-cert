@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Bash script for adding a valid cert
+
+function add-valid-cert(){
+  yum install wget -y
+  cd /tmp
+  wget http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+  chmod +x python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+  rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv --to-stdout ./etc/rhsm/ca/redhat-uep.pem | tee /etc/rhsm/ca/redhat-uep.pem
+}
+
+add-valid-cert
+
+echo "DONE"
